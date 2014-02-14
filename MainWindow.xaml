@@ -2,10 +2,174 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        x:Class="JisResumeGenerater.MainWindow"
-        Title="MainWindow" Height="350" Width="525" SnapsToDevicePixels="True">
+        x:Class="JisResumeGenerater.MainWindow" x:Name="window"
+        Title="MainWindow" Height="576" Width="1024" SnapsToDevicePixels="True">
 
-  <Grid>
+  <metro:MetroWindow.WindowCommands>
+    <metro:WindowCommands>
+      <Button Content="操作" />
+    </metro:WindowCommands>
+  </metro:MetroWindow.WindowCommands>
+  
+  <metro:MetroWindow.Resources>
+    <Style TargetType="StackPanel">
+      <Setter Property="Margin" Value="10 10 10 10" />
+    </Style>
+  </metro:MetroWindow.Resources>
 
-  </Grid>
+  <metro:MetroWindow.Flyouts>
+    <metro:FlyoutsControl>
+      <metro:Flyout Header="操作" Position="Right" Width="200">
+        <StackPanel Orientation="Vertical">
+          <Button Content="履歴書生成" />
+          <Button Content="履歴書テンプレート登録" />
+          <Button Content="履歴書情報保存" />
+          <Button Content="バージョン情報" />
+        </StackPanel>
+      </metro:Flyout>
+      <metro:Flyout Header="使い方" Position="Right" Width="{DynamicResource Width}">
+        <WebBrowser Name="how2useBrowser" />
+      </metro:Flyout>
+      <metro:Flyout Header="個人情報・日付入力" Position="Right" Width="{DynamicResource Width}">
+        <StackPanel Orientation="Vertical">
+          <StackPanel Orientation="Horizontal">
+            <Label>日付選択</Label>
+            <DatePicker Name="dtCreated" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label>個人情報</Label>
+            <StackPanel Orientation="Vertical">
+              <TextBox Name="tbLastName" metro:TextboxHelper.Watermark="姓" />
+              <TextBox Name="tbFirstName" metro:TextboxHelper.Watermark="名" />
+              <TextBox Name="tbLastFurigana" metro:TextboxHelper.Watermark="姓（ふりがな）" />
+              <TextBox Name="tbFirstFurigana" metro:TextboxHelper.Watermark="名（ふりがな）" />
+              <StackPanel Orientation="Horizontal">
+                <Label>性別</Label>
+                <ComboBox Name="ckGender">
+                  <ComboBoxItem Content="男" IsSelected="True"/>
+                  <ComboBoxItem Content="女"/>
+                </ComboBox>
+              </StackPanel>
+              <StackPanel Orientation="Horizontal">
+                <Label>生年月日</Label>
+                <DatePicker Name="dtBirthday" />
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+      </metro:Flyout>
+      <metro:Flyout Header="主連絡先" Position="Right" Width="{DynamicResource Width}">
+        <StackPanel Orientation="Horizontal">
+          <Label>主連絡先</Label>
+          <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <TextBox Name="tbMainZip" metro:TextboxHelper.Watermark="郵便番号" />
+              <Button>郵便番号から住所検索</Button>
+            </StackPanel>
+            <TextBox Name="tbMainPref" metro:TextboxHelper.Watermark="都道府県" />
+            <TextBox Name="tbMainPrefKana" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
+            <TextBox Name="tbMainCity" metro:TextboxHelper.Watermark="市区町村" />
+            <TextBox Name="tbMainCityKana" metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
+            <TextBox Name="tbMainStreet" metro:TextboxHelper.Watermark="町名番地" />
+            <TextBox Name="tbMainStreetKana" metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
+            <TextBox Name="tbMainRoomNo" metro:TextboxHelper.Watermark="マンション名・部屋番号" />
+            <TextBox Name="tbMainRoomNoKana" metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+          </StackPanel>
+        </StackPanel>
+      </metro:Flyout>
+      <metro:Flyout Header="副連絡先" Position="Right" Width="{DynamicResource Width}">
+        <StackPanel Orientation="Horizontal">
+          <Label>副連絡先</Label>
+          <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <TextBox Name="tbSubZip" metro:TextboxHelper.Watermark="郵便番号" />
+              <Button>郵便番号から住所検索</Button>
+            </StackPanel>
+            <TextBox Name="tbSubPref" metro:TextboxHelper.Watermark="都道府県" />
+            <TextBox Name="tbSubPrefKana" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
+            <TextBox Name="tbSubCity" metro:TextboxHelper.Watermark="市区町村" />
+            <TextBox Name="tbSubCityKana" metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
+            <TextBox Name="tbSubStreet" metro:TextboxHelper.Watermark="町名番地" />
+            <TextBox Name="tbSubStreetKana" metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
+            <TextBox Name="tbSubRoomNo" metro:TextboxHelper.Watermark="マンション名・部屋番号" />
+            <TextBox Name="tbSubRoomNoKana" metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+          </StackPanel>
+        </StackPanel>
+      </metro:Flyout>
+      <metro:Flyout Header="学歴・職歴・賞罰" Position="Right" Width="{DynamicResource Width}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBox Name="tbEduEra" metro:TextboxHelper.Watermark="年号" />
+            <TextBox Name="tbEduYear" metro:TextboxHelper.Watermark="年" />
+            <TextBox Name="tbEduMonth" metro:TextboxHelper.Watermark="月" />
+            <TextBox Name="tbEduBg" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
+            <Button Content="入力" />
+
+          </StackPanel>
+
+          <ListView Grid.Row="1" ItemsSource="{Binding ListEduCar}" />
+        </Grid>
+      </metro:Flyout>
+      <metro:Flyout Header="資格・免許" Position="Right" Width="{DynamicResource Width}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBox Name="tbLicEra" metro:TextboxHelper.Watermark="年号" />
+            <TextBox Name="tbLicYear" metro:TextboxHelper.Watermark="年" />
+            <TextBox Name="tbLicMonth" metro:TextboxHelper.Watermark="月" />
+            <TextBox Name="tbLicBg" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
+            <Button Content="入力" />
+          </StackPanel>
+
+          <ListView Grid.Row="1" ItemsSource="{Binding ListLicences}" />
+        </Grid>
+      </metro:Flyout>
+      <metro:Flyout Header="自己PR" Position="Right" Width="{DynamicResource Width}">
+        <StackPanel Orientation="Horizontal">
+          <Label>自己PR</Label>
+          <TextBox AcceptsReturn="True" metro:TextboxHelper.Watermark="志望の動機、特技、好きな学科、アピールポイントなど" />
+        </StackPanel>
+      </metro:Flyout>
+      <metro:Flyout Header="通勤・扶養・職務上の要望" Position="Right" IsOpen="True" Width="{DynamicResource Width}">
+        <StackPanel Orientation="Vertical">
+          <TextBox Name="tbCommutingTime" metro:TextboxHelper.Watermark="通勤時間（例：約1時間20分）" />
+          <StackPanel Orientation="Horizontal">
+            <Label>扶養家族数（配偶者を除く）</Label>
+            <metro:NumericUpDown Minimum="0" Value="0" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label>配偶者の有無</Label>
+            <metro:ToggleSwitch OnLabel="有" OffLabel="無" Name="swMarried" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label>配偶者の扶養義務</Label>
+            <metro:ToggleSwitch OnLabel="有" OffLabel="無" Name="swSpouseSupport" />
+          </StackPanel>
+          <TextBox Name="tbRequest" AcceptsReturn="True" 
+                   metro:TextboxHelper.Watermark="本人希望入力欄（給料・職種・勤務時間・勤務地・その他の要望についてあれば記入）" />
+        </StackPanel>
+      </metro:Flyout>
+    </metro:FlyoutsControl>
+  </metro:MetroWindow.Flyouts>
+  
+  <WrapPanel Orientation="Horizontal" Margin="50 50 50 50">
+      <metro:Tile Title="使い方" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="個人情報・日付入力" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="主連絡先" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="副連絡先" Width="150" Height="150" TiltFactor="2" ToolTip="現住所以外に連絡を希望する場合のみ入力" />
+      <metro:Tile Title="学歴・職歴・賞罰" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="資格・免許" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="自己PR" Width="150" Height="150" TiltFactor="2" />
+      <metro:Tile Title="通勤・扶養・職務上の要望" Width="150" Height="150" TiltFactor="2" />
+    </WrapPanel>
+  
 </metro:MetroWindow>
