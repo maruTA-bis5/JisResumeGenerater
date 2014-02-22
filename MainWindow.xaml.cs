@@ -19,9 +19,25 @@ namespace JisResumeGenerater {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : MetroWindow {
+        private Dictionary<String, Flyout> dicFlyouts;
         public MainWindow() {
             InitializeComponent();
+
+            dicFlyouts = new Dictionary<string,Flyout>();
+            foreach (Flyout fly in Flyouts.Items) {
+                dicFlyouts.Add(fly.Header, fly);
+            }
         }
 
+        public void onTileClicked(object sender, RoutedEventArgs e) {
+            var tile = sender as Tile;
+            if (tile != null)
+                dicFlyouts[tile.Title].IsOpen = true;
+        }
+        public void onFuncButtonClicked(object sender, RoutedEventArgs e) {
+            var button = sender as Button;
+            if (button != null) 
+                dicFlyouts[button.Content.ToString()].IsOpen = true;
+        }
     }
 }

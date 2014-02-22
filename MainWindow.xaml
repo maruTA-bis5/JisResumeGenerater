@@ -5,21 +5,66 @@
         x:Class="JisResumeGenerater.MainWindow" x:Name="window"
         Title="MainWindow" Height="576" Width="1024" SnapsToDevicePixels="True">
 
-  <metro:MetroWindow.WindowCommands>
-    <metro:WindowCommands>
-      <Button Content="操作" />
-    </metro:WindowCommands>
-  </metro:MetroWindow.WindowCommands>
-  
   <metro:MetroWindow.Resources>
     <Style TargetType="StackPanel">
       <Setter Property="Margin" Value="10 10 10 10" />
     </Style>
+    <Style x:Key="flyoutBase">
+      <Setter Property="metro:Flyout.Position" Value="Right" />
+    </Style>
+    <Style x:Key="tileBase" BasedOn="{StaticResource flyoutBase}">
+      <Setter Property="metro:Tile.Width" Value="150" />
+      <Setter Property="metro:Tile.TiltFactor" Value="2" />
+      <EventSetter Event="metro:Tile.Click" Handler="onTileClicked" />
+    </Style>
+    <Style x:Key="func" BasedOn="{StaticResource flyoutBase}">
+      <Setter Property="metro:Flyout.Header" Value="操作" />
+      <Setter Property="Button.Content" Value="操作" />
+      <EventSetter Event="Button.Click" Handler="onFuncButtonClicked" />
+    </Style>
+    <Style x:Key="how2use" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="使い方" />
+      <Setter Property="metro:Tile.Title" Value="使い方" />
+    </Style>
+    <Style x:Key="personal" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="個人情報・日付入力" />
+      <Setter Property="metro:Tile.Title" Value="個人情報・日付入力" />
+    </Style>
+    <Style x:Key="mainAddr" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="主連絡先" />
+      <Setter Property="metro:Tile.Title" Value="主連絡先" />
+    </Style>
+    <Style x:Key="subAddr" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="副連絡先" />
+      <Setter Property="metro:Tile.Title" Value="副連絡先" />
+    </Style>
+    <Style x:Key="educational" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="学歴・職歴・賞罰" />
+      <Setter Property="metro:Tile.Title" Value="学歴・職歴・賞罰" />
+    </Style>
+    <Style x:Key="license" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="免許・資格" />
+      <Setter Property="metro:Tile.Title" Value="免許・資格" />
+    </Style>
+    <Style x:Key="promotion" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="自己PR" />
+      <Setter Property="metro:Tile.Title" Value="自己PR" />
+    </Style>
+    <Style x:Key="other" BasedOn="{StaticResource tileBase}">
+      <Setter Property="metro:Flyout.Header" Value="通勤・扶養・職務上の要望" />
+      <Setter Property="metro:Tile.Title" Value="通勤・扶養・職務上の要望" />
+    </Style>
   </metro:MetroWindow.Resources>
 
+  <metro:MetroWindow.WindowCommands>
+    <metro:WindowCommands>
+      <Button Style="{StaticResource func}" />
+    </metro:WindowCommands>
+  </metro:MetroWindow.WindowCommands>
+  
   <metro:MetroWindow.Flyouts>
     <metro:FlyoutsControl>
-      <metro:Flyout Header="操作" Position="Right" Width="200">
+      <metro:Flyout Style="{StaticResource func}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Vertical">
           <Button Content="履歴書生成" />
           <Button Content="履歴書テンプレート登録" />
@@ -27,10 +72,10 @@
           <Button Content="バージョン情報" />
         </StackPanel>
       </metro:Flyout>
-      <metro:Flyout Header="使い方" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=how2use}"  Width="{DynamicResource Width}">
         <WebBrowser Name="how2useBrowser" />
       </metro:Flyout>
-      <metro:Flyout Header="個人情報・日付入力" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=personal}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Vertical">
           <StackPanel Orientation="Horizontal">
             <Label>日付選択</Label>
@@ -58,7 +103,7 @@
           </StackPanel>
         </StackPanel>
       </metro:Flyout>
-      <metro:Flyout Header="主連絡先" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=mainAddr}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Horizontal">
           <Label>主連絡先</Label>
           <StackPanel Orientation="Vertical">
@@ -77,7 +122,7 @@
           </StackPanel>
         </StackPanel>
       </metro:Flyout>
-      <metro:Flyout Header="副連絡先" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=subAddr}"  Width="{DynamicResource Width}">
         <StackPanel Orientation="Horizontal">
           <Label>副連絡先</Label>
           <StackPanel Orientation="Vertical">
@@ -96,7 +141,7 @@
           </StackPanel>
         </StackPanel>
       </metro:Flyout>
-      <metro:Flyout Header="学歴・職歴・賞罰" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=educational}" Width="{DynamicResource Width}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition />
@@ -115,7 +160,7 @@
           <ListView Grid.Row="1" ItemsSource="{Binding ListEduCar}" />
         </Grid>
       </metro:Flyout>
-      <metro:Flyout Header="資格・免許" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=license}" Width="{DynamicResource Width}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition />
@@ -133,13 +178,13 @@
           <ListView Grid.Row="1" ItemsSource="{Binding ListLicences}" />
         </Grid>
       </metro:Flyout>
-      <metro:Flyout Header="自己PR" Position="Right" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=promotion}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Horizontal">
           <Label>自己PR</Label>
           <TextBox AcceptsReturn="True" metro:TextboxHelper.Watermark="志望の動機、特技、好きな学科、アピールポイントなど" />
         </StackPanel>
       </metro:Flyout>
-      <metro:Flyout Header="通勤・扶養・職務上の要望" Position="Right" IsOpen="True" Width="{DynamicResource Width}">
+      <metro:Flyout Style="{StaticResource ResourceKey=other}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Vertical">
           <TextBox Name="tbCommutingTime" metro:TextboxHelper.Watermark="通勤時間（例：約1時間20分）" />
           <StackPanel Orientation="Horizontal">
@@ -161,15 +206,15 @@
     </metro:FlyoutsControl>
   </metro:MetroWindow.Flyouts>
   
-  <WrapPanel Orientation="Horizontal" Margin="50 50 50 50">
-      <metro:Tile Title="使い方" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="個人情報・日付入力" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="主連絡先" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="副連絡先" Width="150" Height="150" TiltFactor="2" ToolTip="現住所以外に連絡を希望する場合のみ入力" />
-      <metro:Tile Title="学歴・職歴・賞罰" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="資格・免許" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="自己PR" Width="150" Height="150" TiltFactor="2" />
-      <metro:Tile Title="通勤・扶養・職務上の要望" Width="150" Height="150" TiltFactor="2" />
+  <WrapPanel Name="tilePanel" Orientation="Horizontal" Margin="50 50 50 50">
+      <metro:Tile Style="{StaticResource ResourceKey=how2use}" />
+      <metro:Tile Style="{StaticResource ResourceKey=personal}" />
+      <metro:Tile Style="{StaticResource ResourceKey=mainAddr}" />
+      <metro:Tile Style="{StaticResource ResourceKey=subAddr}" ToolTip="現住所以外に連絡を希望する場合のみ入力" />
+      <metro:Tile Style="{StaticResource ResourceKey=educational}" />
+      <metro:Tile Style="{StaticResource ResourceKey=license}" />
+      <metro:Tile Style="{StaticResource ResourceKey=promotion}" />
+      <metro:Tile Style="{StaticResource ResourceKey=other}" />
     </WrapPanel>
   
 </metro:MetroWindow>
