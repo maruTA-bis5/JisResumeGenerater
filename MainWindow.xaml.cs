@@ -23,6 +23,8 @@ namespace JisResumeGenerater {
         public MainWindow() {
             InitializeComponent();
 
+            this.DataContext = new MainWindowViewModel();
+
             dicFlyouts = new Dictionary<string,Flyout>();
             foreach (Flyout fly in Flyouts.Items) {
                 dicFlyouts.Add(fly.Header, fly);

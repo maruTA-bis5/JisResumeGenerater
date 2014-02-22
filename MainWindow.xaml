@@ -79,25 +79,25 @@
         <StackPanel Orientation="Vertical">
           <StackPanel Orientation="Horizontal">
             <Label>日付選択</Label>
-            <DatePicker Name="dtCreated" />
+            <DatePicker Name="dtCreated" SelectedDate="{Binding CreatedAt}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label>個人情報</Label>
             <StackPanel Orientation="Vertical">
-              <TextBox Name="tbLastName" metro:TextboxHelper.Watermark="姓" />
-              <TextBox Name="tbFirstName" metro:TextboxHelper.Watermark="名" />
-              <TextBox Name="tbLastFurigana" metro:TextboxHelper.Watermark="姓（ふりがな）" />
-              <TextBox Name="tbFirstFurigana" metro:TextboxHelper.Watermark="名（ふりがな）" />
+              <TextBox metro:TextboxHelper.Watermark="姓" Text="{Binding FamilyName}" />
+              <TextBox metro:TextboxHelper.Watermark="名" Text="{Binding GivenName}" />
+              <TextBox metro:TextboxHelper.Watermark="姓（ふりがな）" Text="{Binding FamilyNameKana}" />
+              <TextBox metro:TextboxHelper.Watermark="名（ふりがな）" Text="{Binding GivenNameKana}" />
               <StackPanel Orientation="Horizontal">
                 <Label>性別</Label>
-                <ComboBox Name="ckGender">
+                <ComboBox Name="ckGender" SelectedItem="{Binding Gender}">
                   <ComboBoxItem Content="男" IsSelected="True"/>
                   <ComboBoxItem Content="女"/>
                 </ComboBox>
               </StackPanel>
               <StackPanel Orientation="Horizontal">
                 <Label>生年月日</Label>
-                <DatePicker Name="dtBirthday" />
+                <DatePicker Name="dtBirthday" SelectedDate="{Binding BirthDay}" />
               </StackPanel>
             </StackPanel>
           </StackPanel>
@@ -108,17 +108,18 @@
           <Label>主連絡先</Label>
           <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-              <TextBox Name="tbMainZip" metro:TextboxHelper.Watermark="郵便番号" />
+              <TextBox Text="{Binding MainZip}" metro:TextboxHelper.Watermark="郵便番号" />
               <Button>郵便番号から住所検索</Button>
             </StackPanel>
-            <TextBox Name="tbMainPref" metro:TextboxHelper.Watermark="都道府県" />
-            <TextBox Name="tbMainPrefKana" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
-            <TextBox Name="tbMainCity" metro:TextboxHelper.Watermark="市区町村" />
-            <TextBox Name="tbMainCityKana" metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
-            <TextBox Name="tbMainStreet" metro:TextboxHelper.Watermark="町名番地" />
-            <TextBox Name="tbMainStreetKana" metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
-            <TextBox Name="tbMainRoomNo" metro:TextboxHelper.Watermark="マンション名・部屋番号" />
-            <TextBox Name="tbMainRoomNoKana" metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+            <TextBox Text="{Binding MainPref}"  metro:TextboxHelper.Watermark="都道府県" />
+            <TextBox Text="{Binding MainPrefKana}" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
+            <TextBox Text="{Binding MainCity}"  metro:TextboxHelper.Watermark="市区町村" />
+            <TextBox Text="{Binding MainCityKana}"  metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
+            <TextBox Text="{Binding MainStreet}"  metro:TextboxHelper.Watermark="町名番地" />
+            <TextBox Text="{Binding MainStreetKana}"  metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
+            <TextBox Text="{Binding MainRoomNo}"  metro:TextboxHelper.Watermark="マンション名・部屋番号" />
+            <TextBox Text="{Binding MainRoomNoKana}"  metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+            <TextBox Text="{Binding MainTel}" metro:TextboxHelper.Watermark="電話番号" />
           </StackPanel>
         </StackPanel>
       </metro:Flyout>
@@ -127,17 +128,18 @@
           <Label>副連絡先</Label>
           <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-              <TextBox Name="tbSubZip" metro:TextboxHelper.Watermark="郵便番号" />
+              <TextBox Text="{Binding SubZip}"  metro:TextboxHelper.Watermark="郵便番号" />
               <Button>郵便番号から住所検索</Button>
             </StackPanel>
-            <TextBox Name="tbSubPref" metro:TextboxHelper.Watermark="都道府県" />
-            <TextBox Name="tbSubPrefKana" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
-            <TextBox Name="tbSubCity" metro:TextboxHelper.Watermark="市区町村" />
-            <TextBox Name="tbSubCityKana" metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
-            <TextBox Name="tbSubStreet" metro:TextboxHelper.Watermark="町名番地" />
-            <TextBox Name="tbSubStreetKana" metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
-            <TextBox Name="tbSubRoomNo" metro:TextboxHelper.Watermark="マンション名・部屋番号" />
-            <TextBox Name="tbSubRoomNoKana" metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+            <TextBox Text="{Binding SubPref}"  metro:TextboxHelper.Watermark="都道府県" />
+            <TextBox Text="{Binding SubPrefKana}" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
+            <TextBox Text="{Binding SubCity}" metro:TextboxHelper.Watermark="市区町村" />
+            <TextBox Text="{Binding SubCityKana}" metro:TextboxHelper.Watermark="市区町村（ふりがな）" />
+            <TextBox Text="{Binding SubStreet}" metro:TextboxHelper.Watermark="町名番地" />
+            <TextBox Text="{Binding SubStreetKana}" metro:TextboxHelper.Watermark="町名番地（ふりがな）" />
+            <TextBox Text="{Binding SubRoomNo}" metro:TextboxHelper.Watermark="マンション名・部屋番号" />
+            <TextBox Text="{Binding SubRoomNoKana}" metro:TextboxHelper.Watermark="マンション名・部屋番号（ふりがな）" />
+            <TextBox Text="{Binding SubTel}" metro:TextboxHelper.Watermark="電話番号" />
           </StackPanel>
         </StackPanel>
       </metro:Flyout>
@@ -149,15 +151,24 @@
           </Grid.RowDefinitions>
 
           <StackPanel Grid.Row="0" Orientation="Vertical">
-            <TextBox Name="tbEduEra" metro:TextboxHelper.Watermark="年号" />
-            <TextBox Name="tbEduYear" metro:TextboxHelper.Watermark="年" />
-            <TextBox Name="tbEduMonth" metro:TextboxHelper.Watermark="月" />
-            <TextBox Name="tbEduBg" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
+            <TextBox Text="{Binding EduJapEra}"  metro:TextboxHelper.Watermark="年号" />
+            <TextBox Text="{Binding EduYear}"  metro:TextboxHelper.Watermark="年" />
+            <TextBox Text="{Binding EduMonth}"  metro:TextboxHelper.Watermark="月" />
+            <TextBox Text="{Binding EduBackground}"  metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
             <Button Content="入力" />
 
           </StackPanel>
 
-          <ListView Grid.Row="1" ItemsSource="{Binding ListEduCar}" />
+          <ListView Grid.Row="1" ItemsSource="{Binding ListEdu}">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Header="年号" DisplayMemberBinding="{Binding Era}" />
+                <GridViewColumn Header="年" DisplayMemberBinding="{Binding Year}" />
+                <GridViewColumn Header="月" DisplayMemberBinding="{Binding Month}" />
+                <GridViewColumn Header="学歴・職歴・賞罰" DisplayMemberBinding="{Binding Detail}" />
+              </GridView>
+            </ListView.View>
+          </ListView>
         </Grid>
       </metro:Flyout>
       <metro:Flyout Style="{StaticResource ResourceKey=license}" Width="{DynamicResource Width}">
@@ -168,38 +179,47 @@
           </Grid.RowDefinitions>
 
           <StackPanel Grid.Row="0" Orientation="Vertical">
-            <TextBox Name="tbLicEra" metro:TextboxHelper.Watermark="年号" />
-            <TextBox Name="tbLicYear" metro:TextboxHelper.Watermark="年" />
-            <TextBox Name="tbLicMonth" metro:TextboxHelper.Watermark="月" />
-            <TextBox Name="tbLicBg" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
+            <TextBox Text="{Binding LicJapEra}"  metro:TextboxHelper.Watermark="年号" />
+            <TextBox Text="{Binding LicYear}"  metro:TextboxHelper.Watermark="年" />
+            <TextBox Text="{Binding LicMonth}"  metro:TextboxHelper.Watermark="月" />
+            <TextBox Text="{Binding LicBackground}" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
             <Button Content="入力" />
           </StackPanel>
 
-          <ListView Grid.Row="1" ItemsSource="{Binding ListLicences}" />
+          <ListView Grid.Row="1" ItemsSource="{Binding ListLicense}">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Header="年号" DisplayMemberBinding="{Binding Era}" />
+                <GridViewColumn Header="年" DisplayMemberBinding="{Binding Year}" />
+                <GridViewColumn Header="月" DisplayMemberBinding="{Binding Month}" />
+                <GridViewColumn Header="学歴・職歴・賞罰" DisplayMemberBinding="{Binding Detail}" />
+              </GridView>
+            </ListView.View>
+          </ListView>
         </Grid>
       </metro:Flyout>
       <metro:Flyout Style="{StaticResource ResourceKey=promotion}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Horizontal">
           <Label>自己PR</Label>
-          <TextBox AcceptsReturn="True" metro:TextboxHelper.Watermark="志望の動機、特技、好きな学科、アピールポイントなど" />
+          <TextBox AcceptsReturn="True" Text="{Binding Promotion}" metro:TextboxHelper.Watermark="志望の動機、特技、好きな学科、アピールポイントなど" />
         </StackPanel>
       </metro:Flyout>
       <metro:Flyout Style="{StaticResource ResourceKey=other}" Width="{DynamicResource Width}">
         <StackPanel Orientation="Vertical">
-          <TextBox Name="tbCommutingTime" metro:TextboxHelper.Watermark="通勤時間（例：約1時間20分）" />
+          <TextBox Text="{Binding CommutingTime}"  metro:TextboxHelper.Watermark="通勤時間（例：約1時間20分）" />
           <StackPanel Orientation="Horizontal">
             <Label>扶養家族数（配偶者を除く）</Label>
-            <metro:NumericUpDown Minimum="0" Value="0" />
+            <metro:NumericUpDown Minimum="0" Value="{Binding FamilyCount}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label>配偶者の有無</Label>
-            <metro:ToggleSwitch OnLabel="有" OffLabel="無" Name="swMarried" />
+            <metro:ToggleSwitch OnLabel="有" OffLabel="無" IsChecked="{Binding IsMarried}" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <Label>配偶者の扶養義務</Label>
-            <metro:ToggleSwitch OnLabel="有" OffLabel="無" Name="swSpouseSupport" />
+            <metro:ToggleSwitch OnLabel="有" OffLabel="無" IsChecked="{Binding IsSpouseSupport}" />
           </StackPanel>
-          <TextBox Name="tbRequest" AcceptsReturn="True" 
+          <TextBox AcceptsReturn="True" Text="{Binding Request}" 
                    metro:TextboxHelper.Watermark="本人希望入力欄（給料・職種・勤務時間・勤務地・その他の要望についてあれば記入）" />
         </StackPanel>
       </metro:Flyout>
