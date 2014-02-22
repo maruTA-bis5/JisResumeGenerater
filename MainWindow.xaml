@@ -109,7 +109,7 @@
           <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
               <TextBox Text="{Binding MainZip}" metro:TextboxHelper.Watermark="郵便番号" />
-              <Button>郵便番号から住所検索</Button>
+              <Button Click="findByMainZip">郵便番号から住所検索</Button>
             </StackPanel>
             <TextBox Text="{Binding MainPref}"  metro:TextboxHelper.Watermark="都道府県" />
             <TextBox Text="{Binding MainPrefKana}" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
@@ -129,7 +129,7 @@
           <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
               <TextBox Text="{Binding SubZip}"  metro:TextboxHelper.Watermark="郵便番号" />
-              <Button>郵便番号から住所検索</Button>
+              <Button Click="findBySubZip">郵便番号から住所検索</Button>
             </StackPanel>
             <TextBox Text="{Binding SubPref}"  metro:TextboxHelper.Watermark="都道府県" />
             <TextBox Text="{Binding SubPrefKana}" metro:TextboxHelper.Watermark="都道府県（ふりがな）" />
