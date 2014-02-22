@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace JisResumeGenerater {
     /// <summary>
@@ -22,7 +23,7 @@ namespace JisResumeGenerater {
         private Dictionary<String, Flyout> dicFlyouts;
         public MainWindow() {
             InitializeComponent();
-
+            _instance = this;
             this.DataContext = new MainWindowViewModel();
 
             dicFlyouts = new Dictionary<string,Flyout>();
@@ -40,6 +41,16 @@ namespace JisResumeGenerater {
             var button = sender as Button;
             if (button != null) 
                 dicFlyouts[button.Content.ToString()].IsOpen = true;
+        }
+        public void btEduInsert(object sender, RoutedEventArgs e) {
+            ((MainWindowViewModel)this.DataContext).EduInsert();
+        }
+        public void btLicInsert(object sender, RoutedEventArgs e) {
+            ((MainWindowViewModel)this.DataContext).LicInsert();
+        }
+        private static MetroWindow _instance = null;
+        public static Task<MessageDialogResult> ShowMessageDialog(string title, string message) {
+            return DialogManager.ShowMessageAsync(_instance, title, message);
         }
     }
 }

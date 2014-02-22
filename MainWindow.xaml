@@ -151,17 +151,27 @@
           </Grid.RowDefinitions>
 
           <StackPanel Grid.Row="0" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <Label>種別</Label>
+              <ComboBox SelectedItem="{Binding EduType}">
+                <ComboBoxItem Name="学歴" Content="学歴" IsSelected="True" />
+                <ComboBoxItem Name="職歴" Content="職歴" />
+                <ComboBoxItem Name="賞罰" Content="賞罰" />
+              </ComboBox>
+            </StackPanel>
             <TextBox Text="{Binding EduJapEra}"  metro:TextboxHelper.Watermark="年号" />
             <TextBox Text="{Binding EduYear}"  metro:TextboxHelper.Watermark="年" />
             <TextBox Text="{Binding EduMonth}"  metro:TextboxHelper.Watermark="月" />
-            <TextBox Text="{Binding EduBackground}"  metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
-            <Button Content="入力" />
+            <TextBox Text="{Binding EduBackground}"  metro:TextboxHelper.Watermark="記入例：○○大学 ○○学部 ○○学科 入学）" />
+            <metro:ToggleSwitch Header="空欄警告を無視する" IsChecked="{Binding EduErrIgnore}" OffLabel="No" OnLabel="Yes" />
+            <Button Content="入力" Click="btEduInsert" />
 
           </StackPanel>
 
-          <ListView Grid.Row="1" ItemsSource="{Binding ListEdu}">
+          <ListView Grid.Row="1" ItemsSource="{Binding ListEdu}"  SelectedIndex="{Binding ListEdu_SelectedIndex}">
             <ListView.View>
               <GridView>
+                <GridViewColumn Header="種別" DisplayMemberBinding="{Binding Meta}" />
                 <GridViewColumn Header="年号" DisplayMemberBinding="{Binding Era}" />
                 <GridViewColumn Header="年" DisplayMemberBinding="{Binding Year}" />
                 <GridViewColumn Header="月" DisplayMemberBinding="{Binding Month}" />
@@ -182,11 +192,12 @@
             <TextBox Text="{Binding LicJapEra}"  metro:TextboxHelper.Watermark="年号" />
             <TextBox Text="{Binding LicYear}"  metro:TextboxHelper.Watermark="年" />
             <TextBox Text="{Binding LicMonth}"  metro:TextboxHelper.Watermark="月" />
-            <TextBox Text="{Binding LicBackground}" metro:TextboxHelper.Watermark="学歴（記入例：○○大学 ○○学部 ○○学科 入学）" />
-            <Button Content="入力" />
+            <TextBox Text="{Binding LicBackground}" metro:TextboxHelper.Watermark="記入例：第１種普通自動車運転免許 取得" />
+            <metro:ToggleSwitch Header="空欄警告を無視する" IsChecked="{Binding LicErrIgnore}" OffLabel="No" OnLabel="Yes" />
+            <Button Content="入力" Click="btLicInsert" />
           </StackPanel>
 
-          <ListView Grid.Row="1" ItemsSource="{Binding ListLicense}">
+          <ListView Grid.Row="1" ItemsSource="{Binding ListLicense}" SelectedIndex="{Binding ListLicense_SelectedIndex}">
             <ListView.View>
               <GridView>
                 <GridViewColumn Header="年号" DisplayMemberBinding="{Binding Era}" />

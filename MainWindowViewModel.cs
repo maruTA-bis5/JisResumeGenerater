@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace JisResumeGenerater {
     class MainWindowViewModel : INotifyPropertyChanged {
@@ -240,6 +241,7 @@ namespace JisResumeGenerater {
         #endregion
 
         #region 学歴・職歴・賞罰
+        public ComboBoxItem EduType { get; set; }
         private string _EduJapEra;
         public string EduJapEra {
             get { return _EduJapEra; }
@@ -270,6 +272,14 @@ namespace JisResumeGenerater {
             set {
                 _EduBackground = value;
                 OnPropertyChanged("EduBackground");
+            }
+        }
+        public bool EduErrIgnore { get; set; }
+        private int _ListEdu_SelectedIndex;
+        public int ListEdu_SelectedIndex {
+            get { return _ListEdu_SelectedIndex; }
+            set {
+                _ListEdu_SelectedIndex = value;
             }
         }
         public IList<JRG_ListViewObject> ListEdu { get; set; }
@@ -306,6 +316,14 @@ namespace JisResumeGenerater {
             set {
                 _LicBackground = value;
                 OnPropertyChanged("LicBackground");
+            }
+        }
+        public bool LicErrIgnore { get; set; }
+        private int _ListLicense_SelectedIndex;
+        private int ListLicense_SelectedIndex {
+            get { return _ListLicense_SelectedIndex; }
+            set {
+                _ListLicense_SelectedIndex = value;
             }
         }
         public IList<JRG_ListViewObject> ListLicense { get; set; }
@@ -363,6 +381,69 @@ namespace JisResumeGenerater {
         }
         #endregion
 
+        public async void EduInsert() {
+            if (EduErrIgnore || await _EduInsertCheck()) {
+                var obj = new JRG_ListViewObject() {
+                    Meta = EduType.Content.ToString(),
+                    Era = EduJapEra,
+                    Year = EduYear,
+                    Month = EduMonth,
+                    Detail = EduBackground
+                };
+                ListEdu.Add(obj);
+                EduJapEra = EduYear = EduMonth = EduBackground = "";
+            }
+        }
+        private async Task<bool> _EduInsertCheck() {
+            if (String.IsNullOrWhiteSpace(EduJapEra)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "年号が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduYear)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "年が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduMonth)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "月が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduBackground)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "詳細が未入力です");
+            } else {
+                return true;
+            }
+            return false;
+        }
+
+        public async void LicInsert() {
+            if (LicErrIgnore || await _LicInsertCheck()) {
+                var obj = new JRG_ListViewObject() {
+                    Era = LicJapEra,
+                    Year = LicYear,
+                    Month = LicMonth,
+                    Detail = LicBackground
+                };
+                ListLicense.Add(obj);
+                LicJapEra = LicYear = LicMonth = LicBackground = "";
+            }
+        }
+        private async Task<bool> _LicInsertCheck() {
+            if (String.IsNullOrWhiteSpace(EduJapEra)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "年号が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduYear)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "年が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduMonth)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "月が未入力です");
+            } else if (String.IsNullOrWhiteSpace(EduBackground)) {
+                await MainWindow.ShowMessageDialog(
+                    "注意", "詳細が未入力です");
+            } else {
+                return true;
+            }
+            return false;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String name) {
             PropertyChanged(this, new PropertyChangedEventArgs(name));
@@ -370,6 +451,7 @@ namespace JisResumeGenerater {
     }
 
     class JRG_ListViewObject {
+        public string Meta { get; set; }
         public string Era { get; set; }
         public string Year { get; set; }
         public string Month { get; set; }
